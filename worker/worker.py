@@ -26,6 +26,9 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 health_app = Flask(__name__)
 python_logging.getLogger('werkzeug').setLevel(python_logging.ERROR)
 
+@health_app.route("/", methods=["GET"])
+def index():
+    return jsonify({"status": "running", "service": "worker"}), 200
 
 @health_app.route("/health", methods=["GET"])
 def health():
