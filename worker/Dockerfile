@@ -16,5 +16,6 @@ RUN useradd -m workeruser \
 
 USER workeruser
 
+EXPOSE 5001
 
 CMD ["python", "worker.py"]
