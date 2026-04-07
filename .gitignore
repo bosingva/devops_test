@@ -1,0 +1,105 @@
+# ---------------------------
+
+# Python
+
+# ---------------------------
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Python compiled extensions
+
+*.so
+
+# Distribution / packaging
+
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---------------------------
+
+# Virtual Environments
+
+# ---------------------------
+
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ---------------------------
+
+# Environment Variables
+
+# ---------------------------
+
+.env
+.env.*
+!.env.example
+
+# ---------------------------
+
+# Logs
+
+# ---------------------------
+
+logs/
+*.log
+!logs/.gitkeep
+# ---------------------------
+
+# Coverage / Testing
+
+# ---------------------------
+
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# ---------------------------
+
+# Editor / IDE
+
+# ---------------------------
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------------------------
+
+# OS files
+
+# ---------------------------
+
+.DS_Store
+Thumbs.db
+
+# ---------------------------
+
+# Docker
+
+# ---------------------------
+
+docker-compose.override.yml
+
+# Docker artifacts
+
+*.tar
+*.tar.gz
+
+# ---------------------------
+
+# CI artifacts
+
+# ---------------------------
+
+artifacts/
