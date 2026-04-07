@@ -13,7 +13,7 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
 @app.route("/task", methods=["GET", "POST"])
 def send_task():
-    task = {"task": "This task was sent from app service"}
+    task = {"task": "This task was sent from app service/v1"}
     r.rpush("tasks", json.dumps(task))
     return jsonify({"status": "task queued", "queue": "tasks"}), 200
 

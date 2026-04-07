@@ -1,0 +1,43 @@
+name: Build and Save App Image
+
+env:
+  IMAGE_NAME: app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set image tag
+        run: echo "IMAGE_TAG=${GITHUB_SHA::8}" >> $GITHUB_ENV
+
+      - name: Build app Docker image
+        run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ./app
+
+      - name: Scan Docker image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          format: table
+          exit-code: '1'
+          severity: 'CRITICAL'
+
+      - name: Save image as tar artifact
+        run: docker save ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -o ${{ env.IMAGE_NAME }}-image.tar
+
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.IMAGE_NAME }}-image
+          path: ${{ env.IMAGE_NAME }}-image.tar
+          retention-days: 7
